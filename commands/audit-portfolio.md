@@ -4,7 +4,7 @@ argument-hint: [repo-paths-or-github-username]
 allowed-tools: ["Read", "Write", "Edit", "Bash", "Glob", "Grep", "WebFetch", "AskUserQuestion", "Skill"]
 ---
 
-# /raihan-toolkit:audit-portfolio
+# /toolkit-skills:audit-portfolio
 
 Activate the **portfolio-audit** skill and run a full audit.
 

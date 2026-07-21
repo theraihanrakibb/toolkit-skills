@@ -1,29 +1,29 @@
 # Toolkit Skills
 
-![CI](https://github.com/theraihanrakibb/raihan-toolkit/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/theraihanrakibb/toolkit-skills/actions/workflows/ci.yml/badge.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.11-blue.svg)
 ![Node](https://img.shields.io/badge/node-20-green.svg)
 
-> A CodeBuddy Code plugin bundle (plugin id: `raihan-toolkit`): 5 skills + 5 slash commands + 1 git-commit guard. Tailored for job-hunt, AI-infra, public-repos, and content creation workflows. Ships with a full-stack web UI (FastAPI + React) that wraps every skill as an HTTP endpoint.
+> A CodeBuddy Code plugin bundle (plugin id: `toolkit-skills`): 5 skills + 5 slash commands + 1 git-commit guard. Tailored for job-hunt, AI-infra, public-repos, and content creation workflows. Ships with a full-stack web UI (FastAPI + React) that wraps every skill as an HTTP endpoint.
 
-**▶ Live demo:** https://theraihanrakibb.github.io/raihan-toolkit/
+**▶ Live demo:** https://theraihanrakibb.github.io/toolkit-skills/
 
 ## Skills & Commands
 
 | Skill | Slash command | What it does |
 |---|---|---|
-| Portfolio Audit | `/raihan-toolkit:audit-portfolio` | Score your public repos against a 10/10 quality bar; output a fix-plan; optionally auto-fix simple gaps. |
-| Job Application | `/raihan-toolkit:apply <jd>` | Tailored cover letter, resume tweaks, likely interview Qs, skills-gap analysis, 7-day prep plan. |
-| PR Draft | `/raihan-toolkit:pr-draft` | Conventional Commit message + PR description + changelog entry from staged diff. |
-| AI-Infra Helper | `/raihan-toolkit:ai-infra-helper` | Navigate SGLang/vLLM-style repos; reminds fork-PR CI behavior; drafts PRs. |
-| Social Media | `/raihan-toolkit:social <idea>` | One idea → 6 platform drafts (FB/IG/YouTube/X/LinkedIn/Gmail) + content calendar. Drafting only — no auto-posting. |
+| Portfolio Audit | `/toolkit-skills:audit-portfolio` | Score your public repos against a 10/10 quality bar; output a fix-plan; optionally auto-fix simple gaps. |
+| Job Application | `/toolkit-skills:apply <jd>` | Tailored cover letter, resume tweaks, likely interview Qs, skills-gap analysis, 7-day prep plan. |
+| PR Draft | `/toolkit-skills:pr-draft` | Conventional Commit message + PR description + changelog entry from staged diff. |
+| AI-Infra Helper | `/toolkit-skills:ai-infra-helper` | Navigate SGLang/vLLM-style repos; reminds fork-PR CI behavior; drafts PRs. |
+| Social Media | `/toolkit-skills:social <idea>` | One idea → 6 platform drafts (FB/IG/YouTube/X/LinkedIn/Gmail) + content calendar. Drafting only — no auto-posting. |
 
 ## Install
 
 ### Option A — Dev/test (quick)
 ```bash
-cc --plugin-dir e:\CodingWorkplace\raihan-toolkit
+cc --plugin-dir e:\CodingWorkplace\toolkit-skills
 ```
 Hooks load at session start. Run `/hooks` to verify.
 
@@ -33,9 +33,9 @@ bash scripts/sync-to-cache.sh
 ```
 Then add to `~/.codebuddy/installed_plugins.json`:
 ```json
-"raihan-toolkit@local": [{
+"toolkit-skills@local": [{
   "scope": "user",
-  "installPath": "C:\\Users\\Raihan\\.codebuddy\\plugins\\cache\\local\\raihan-toolkit\\1.0.0",
+  "installPath": "C:\\Users\\Raihan\\.codebuddy\\plugins\\cache\\local\\toolkit-skills\\1.0.0",
   "version": "1.0.0",
   "installedAt": "<ISO date>",
   "lastUpdated": "<ISO date>"
@@ -43,17 +43,17 @@ Then add to `~/.codebuddy/installed_plugins.json`:
 ```
 And in `~/.codebuddy/settings.json` → `enabledPlugins`:
 ```json
-"raihan-toolkit@local": true
+"toolkit-skills@local": true
 ```
 Restart `cc` to confirm auto-load.
 
 ### Editing workflow
-Edit files in `e:\CodingWorkplace\raihan-toolkit\`, then re-run `scripts/sync-to-cache.sh` to push to the persistent cache. Restart `cc` for hook changes.
+Edit files in `e:\CodingWorkplace\toolkit-skills\`, then re-run `scripts/sync-to-cache.sh` to push to the persistent cache. Restart `cc` for hook changes.
 
 ## File layout
 
 ```
-raihan-toolkit/
+toolkit-skills/
 ├── .codebuddy-plugin/plugin.json
 ├── commands/          # 5 slash commands
 ├── skills/            # 5 SKILL.md (auto-activating)

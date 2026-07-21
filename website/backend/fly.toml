@@ -1,7 +1,7 @@
-# Fly.io config for the raihan-toolkit backend.
+# Fly.io config for the toolkit-skills backend.
 # Docs: https://fly.io/docs/reference/configuration/
 
-app = "raihan-toolkit-backend"
+app = "toolkit-skills-backend"
 primary_region = "nrt"  # Tokyo — closest Fly region to China
 
 [build]

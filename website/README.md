@@ -1,4 +1,4 @@
-# raihan-toolkit website
+# toolkit-skills website
 
 Full-stack web UI for the 5 CodeBuddy skills. FastAPI backend + React + Vite frontend. Template-based generation — no LLM dependency, works out of the box.
 
@@ -108,4 +108,4 @@ cd frontend && vercel env add FLY_BACKEND_URL production && vercel --prod
 
 Env vars:
 - Backend: `ALLOWED_ORIGINS` (comma-separated origins, or `*` for a public demo), `GITHUB_TOKEN` (optional, raises GitHub API rate limit for `audit-portfolio`).
-- Frontend: `FLY_BACKEND_URL` (e.g. `https://raihan-toolkit-backend.fly.dev`) — used by `vercel.json` rewrites.
+- Frontend: `FLY_BACKEND_URL` (e.g. `https://toolkit-skills-backend.fly.dev`) — used by `vercel.json` rewrites.

@@ -4,7 +4,7 @@ argument-hint: <your-content-idea> [--tone=professional|casual|promotional|educa
 allowed-tools: ["Read", "Write", "Edit", "Bash", "AskUserQuestion", "Skill"]
 ---
 
-# /raihan-toolkit:social
+# /toolkit-skills:social
 
 Activate the **social-media** skill.
 

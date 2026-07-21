@@ -4,7 +4,7 @@ argument-hint: <paste-JD-or-job-URL>
 allowed-tools: ["Read", "Write", "Edit", "Bash", "WebFetch", "AskUserQuestion", "Skill"]
 ---
 
-# /raihan-toolkit:apply
+# /toolkit-skills:apply
 
 Activate the **job-application** skill for the JD provided.
 

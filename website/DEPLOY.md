@@ -1,8 +1,8 @@
-# Deploying raihan-toolkit
+# Deploying toolkit-skills
 
 Two deployments:
-- **Backend** (FastAPI) → **Fly.io** → `https://raihan-toolkit-backend.fly.dev`
-- **Frontend** (React + Vite) → **Vercel** → `https://raihan-toolkit.<your-handle>.vercel.app`
+- **Backend** (FastAPI) → **Fly.io** → `https://toolkit-skills-backend.fly.dev`
+- **Frontend** (React + Vite) → **Vercel** → `https://toolkit-skills.<your-handle>.vercel.app`
 
 Vercel proxies `/api/*` to the Fly backend (configured in `website/frontend/vercel.json`), so the frontend code stays unchanged.
 
@@ -36,16 +36,16 @@ Browser opens → complete sign-in.
 
 ### 1.3 Launch the app (uses `website/backend/fly.toml`)
 ```bash
-cd e:/CodingWorkplace/raihan-toolkit/website/backend
+cd e:/CodingWorkplace/toolkit-skills/website/backend
 fly launch --no-deploy
 ```
 - When prompted "Would you like to copy the configuration to the new app?", answer **Yes** (uses the committed `fly.toml`).
-- If the app name `raihan-toolkit-backend` is taken, Fly will suggest an alternative — accept it and **update `fly.toml`'s `app` field** to match, then commit.
+- If the app name `toolkit-skills-backend` is taken, Fly will suggest an alternative — accept it and **update `fly.toml`'s `app` field** to match, then commit.
 - Pick the same region as `fly.toml` (`nrt` — Tokyo) or choose a closer one.
 
 ### 1.4 Set secrets
 ```bash
-fly secrets set ALLOWED_ORIGINS="https://raihan-toolkit.vercel.app"
+fly secrets set ALLOWED_ORIGINS="https://toolkit-skills.vercel.app"
 fly secrets set GITHUB_TOKEN="<your-github-pat-with-public-repo-scope>"   # optional, raises GitHub API rate limit
 ```
 Note: `ALLOWED_ORIGINS` will be finalized in step 2.4 once you know the Vercel URL. For now, set it to your best guess; you can re-run `fly secrets set ALLOWED_ORIGINS=...` later.
@@ -56,12 +56,12 @@ fly deploy
 ```
 First deploy takes ~2–3 minutes. When it finishes, you'll get the URL:
 ```
-https://raihan-toolkit-backend.fly.dev
+https://toolkit-skills-backend.fly.dev
 ```
 
 ### 1.6 Verify
 ```bash
-curl https://raihan-toolkit-backend.fly.dev/api/health
+curl https://toolkit-skills-backend.fly.dev/api/health
 # → {"status":"ok","skills":[...]}
 ```
 
@@ -86,7 +86,7 @@ From the project root:
 ```bash
 cd website/frontend
 vercel env add FLY_BACKEND_URL production
-# Paste: https://raihan-toolkit-backend.fly.dev
+# Paste: https://toolkit-skills-backend.fly.dev
 ```
 (Or set it via the Vercel dashboard → Project → Settings → Environment Variables.)
 
@@ -95,13 +95,13 @@ vercel env add FLY_BACKEND_URL production
 vercel --prod
 ```
 - First run links the project; accept defaults (Vite framework auto-detected from `vercel.json`).
-- Output: `https://raihan-toolkit.<hash>.vercel.app` (production URL).
+- Output: `https://toolkit-skills.<hash>.vercel.app` (production URL).
 
 ### 2.5 Finalize CORS on the backend
 Once you have the Vercel URL, re-set the backend's allowed origins:
 ```bash
 cd website/backend
-fly secrets set ALLOWED_ORIGINS="https://raihan-toolkit.<hash>.vercel.app"
+fly secrets set ALLOWED_ORIGINS="https://toolkit-skills.<hash>.vercel.app"
 ```
 (For multiple origins, comma-separate: `https://a.vercel.app,https://b.vercel.app`. For a public demo with no credentials, you can also set `ALLOWED_ORIGINS=*`.)
 
@@ -114,7 +114,7 @@ Open the Vercel URL → the Social Media tab → type an idea → "Draft for all
 
 If you'd rather not use the CLIs:
 
-- **Vercel:** Dashboard → New Project → Import `theraihanrakibb/raihan-toolkit` → set Root Directory to `website/frontend` → add `FLY_BACKEND_URL` env var → Deploy.
+- **Vercel:** Dashboard → New Project → Import `theraihanrakibb/toolkit-skills` → set Root Directory to `website/frontend` → add `FLY_BACKEND_URL` env var → Deploy.
 - **Fly.io:** Dashboard → Launch → connect repo → set Dockerfile path to `website/backend/Dockerfile` → set `ALLOWED_ORIGINS` + `GITHUB_TOKEN` secrets → Deploy.
 
 ---

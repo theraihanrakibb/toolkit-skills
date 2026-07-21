@@ -4,7 +4,7 @@ argument-hint: [--from=<ref>] [--scope=<scope>]
 allowed-tools: ["Read", "Write", "Edit", "Bash", "AskUserQuestion", "Skill"]
 ---
 
-# /raihan-toolkit:pr-draft
+# /toolkit-skills:pr-draft
 
 Activate the **pr-draft** skill.
 

@@ -31,7 +31,7 @@ PATTERNS='Generated with CodeBuddy|Generated with Claude Code|Co-Authored-By:[[:
 if printf '%s' "$CMD" | grep -qiE "$PATTERNS"; then
   MSG="Blocked: git commit message contains an AI-generation footer.
 
-The raihan-toolkit enforces a strict no-AI-footer policy on job-hunt and public repos.
+Toolkit Skills enforces a strict no-AI-footer policy on job-hunt and public repos.
 
 Rewrite your commit message as a clean Conventional Commit:
   <type>(<scope>): <subject>

@@ -8,7 +8,7 @@
 set -euo pipefail
 
 PLUGIN_ROOT="${CODEBUDDY_PLUGIN_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
-PLUGIN_NAME="raihan-toolkit"
+PLUGIN_NAME="toolkit-skills"
 VERSION="1.0.0"
 
 if [ -z "${USERPROFILE:-}" ] && [ -z "${HOME:-}" ]; then

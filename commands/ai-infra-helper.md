@@ -4,7 +4,7 @@ argument-hint: [question-or-repo-path]
 allowed-tools: ["Read", "Write", "Edit", "Bash", "Glob", "Grep", "AskUserQuestion", "Skill"]
 ---
 
-# /raihan-toolkit:ai-infra-helper
+# /toolkit-skills:ai-infra-helper
 
 Activate the **ai-infra-helper** skill.
 

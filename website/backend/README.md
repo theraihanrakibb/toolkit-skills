@@ -1,4 +1,4 @@
-# raihan-toolkit API (FastAPI backend)
+# toolkit-skills API (FastAPI backend)
 
 HTTP wrapper for the 5 CodeBuddy skills. Template-based generation — no LLM dependency, works out of the box.
 
