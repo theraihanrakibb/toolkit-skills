@@ -1,11 +1,13 @@
-# raihan-toolkit
+# Toolkit Skills
 
 ![CI](https://github.com/theraihanrakibb/raihan-toolkit/actions/workflows/ci.yml/badge.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.11-blue.svg)
 ![Node](https://img.shields.io/badge/node-20-green.svg)
 
-A CodeBuddy Code plugin bundle: 5 skills + 5 slash commands + 1 git-commit guard. Tailored for job-hunt, AI-infra, public-repos, and content creation workflows. Ships with a full-stack web UI (FastAPI + React) that wraps every skill as an HTTP endpoint.
+> A CodeBuddy Code plugin bundle (plugin id: `raihan-toolkit`): 5 skills + 5 slash commands + 1 git-commit guard. Tailored for job-hunt, AI-infra, public-repos, and content creation workflows. Ships with a full-stack web UI (FastAPI + React) that wraps every skill as an HTTP endpoint.
+
+**▶ Live demo:** https://theraihanrakibb.github.io/raihan-toolkit/
 
 ## Skills & Commands
 

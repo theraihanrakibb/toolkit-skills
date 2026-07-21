@@ -1,7 +1,8 @@
 {
   "name": "raihan-toolkit",
+  "displayName": "Toolkit Skills",
   "version": "1.0.0",
-  "description": "Personal productivity suite: portfolio auditor, job-application accelerator, clean commit/PR writer, AI-infra contributor coach, and social-media content drafter.",
+  "description": "Toolkit Skills: portfolio auditor, job-application accelerator, clean commit/PR writer, AI-infra contributor coach, and social-media content drafter.",
   "author": {
     "name": "MD RAKIBUL ISLAM RAIHAN",
     "url": "https://github.com/theraihanrakibb"

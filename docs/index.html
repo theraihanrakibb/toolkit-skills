@@ -1,44 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>raihan-toolkit — 5 AI career/social skills for CodeBuddy Code</title>
-<meta name="description" content="A CodeBuddy Code plugin with 5 skills: portfolio audit, job application, PR draft, AI-infra helper, and social-media content generation. Live demo included." />
+<title>Toolkit Skills — 5 AI career &amp; social skills for CodeBuddy Code</title>
+<meta name="description" content="Toolkit Skills: a CodeBuddy Code plugin with 5 skills (portfolio audit, job application, PR draft, AI-infra helper, social media) plus a live browser demo." />
 <style>
   :root {
-    --bg: #0f1220;
-    --panel: #181c2e;
-    --panel-2: #1f2438;
-    --line: #2a3050;
-    --text: #e7ebf5;
-    --muted: #9aa3c0;
-    --accent: #6ea8fe;
-    --accent-2: #b388ff;
-    --good: #46d39a;
-    --warn: #ffb454;
-    --bad: #ff6b81;
+    --bg: #0f1220; --panel: #181c2e; --panel-2: #1f2438; --line: #2a3050;
+    --text: #e7ebf5; --muted: #9aa3c0; --accent: #6ea8fe; --accent-2: #b388ff;
+    --good: #46d39a; --warn: #ffb454; --bad: #ff6b81;
     --radius: 14px;
     --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
     --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
+  html[data-theme="light"] {
+    --bg: #f6f8fc; --panel: #ffffff; --panel-2: #eef1f8; --line: #d8deec;
+    --text: #1a2036; --muted: #5b647e;
+    --accent: #2f6fed; --accent-2: #7c3aed;
+    --good: #0f9d6b; --warn: #b9740a; --bad: #d63a52;
+  }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    margin: 0;
-    font-family: var(--sans);
+    margin: 0; font-family: var(--sans);
     background: radial-gradient(1200px 600px at 80% -10%, #1b2340 0%, transparent 60%), var(--bg);
-    background-color: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
+    background-color: var(--bg); color: var(--text); line-height: 1.6;
+    transition: background-color .2s ease, color .2s ease;
   }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
   .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
   header.nav {
-    position: sticky; top: 0; z-index: 50;
-    backdrop-filter: blur(10px);
-    background: rgba(15,18,32,0.78);
+    position: sticky; top: 0; z-index: 50; backdrop-filter: blur(10px);
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
     border-bottom: 1px solid var(--line);
   }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 58px; }
@@ -46,6 +41,8 @@
   .brand .dot { width: 11px; height: 11px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: 0 0 14px var(--accent); }
   .nav a.navlink { color: var(--muted); margin-left: 18px; font-size: 14px; }
   .nav a.navlink:hover { color: var(--text); text-decoration: none; }
+  .theme-btn { background: transparent; border: 1px solid var(--line); color: var(--muted); border-radius: 8px; padding: 6px 10px; cursor: pointer; font-size: 14px; margin-left: 14px; }
+  .theme-btn:hover { color: var(--text); border-color: var(--accent); }
 
   .hero { padding: 64px 0 40px; }
   .hero h1 { font-size: 40px; line-height: 1.15; margin: 0 0 14px; }
@@ -53,14 +50,15 @@
   .hero p.lead { color: var(--muted); font-size: 18px; max-width: 680px; margin: 0 0 26px; }
   .cta { display: flex; gap: 12px; flex-wrap: wrap; }
   .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 11px 18px; border-radius: 10px; font-weight: 600; font-size: 14px;
-    border: 1px solid var(--line); background: var(--panel-2); color: var(--text); cursor: pointer;
-    transition: transform .08s ease, border-color .15s ease, background .15s ease;
+    display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 10px;
+    font-weight: 600; font-size: 14px; border: 1px solid var(--line); background: var(--panel-2);
+    color: var(--text); cursor: pointer; transition: transform .08s ease, border-color .15s ease, background .15s ease;
   }
   .btn:hover { text-decoration: none; transform: translateY(-1px); border-color: var(--accent); }
+  .btn:disabled { opacity: .55; cursor: default; transform: none; }
   .btn.primary { background: linear-gradient(120deg, var(--accent), var(--accent-2)); color: #0b0e1a; border: none; }
   .btn.ghost { background: transparent; }
+  .btn.sm { padding: 6px 12px; font-size: 12px; }
 
   .badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
   .badge { font-size: 12px; color: var(--muted); border: 1px solid var(--line); padding: 5px 10px; border-radius: 999px; background: var(--panel); }
@@ -69,19 +67,14 @@
   h2.section-title { font-size: 26px; margin: 0 0 6px; }
   p.section-sub { color: var(--muted); margin: 0 0 26px; }
 
-  /* skill grid */
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
-  .card {
-    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
-    padding: 18px; transition: border-color .15s ease, transform .1s ease;
-  }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; transition: border-color .15s ease, transform .1s ease; }
   .card:hover { border-color: var(--accent); transform: translateY(-2px); }
   .card .ico { font-size: 22px; }
   .card h3 { margin: 10px 0 6px; font-size: 17px; }
   .card p { margin: 0; color: var(--muted); font-size: 14px; }
   .card .tag { display: inline-block; margin-top: 12px; font-size: 11px; color: var(--accent); border: 1px solid var(--line); padding: 3px 8px; border-radius: 999px; }
 
-  /* demo */
   .demo { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
   .tabs { display: flex; flex-wrap: wrap; gap: 4px; padding: 10px; background: var(--panel-2); border-bottom: 1px solid var(--line); }
   .tab { border: none; background: transparent; color: var(--muted); padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; }
@@ -89,34 +82,32 @@
   .tabpanel { padding: 20px; display: none; }
   .tabpanel.active { display: block; }
   label { display: block; font-size: 13px; color: var(--muted); margin: 12px 0 6px; }
-  input, textarea, select {
-    width: 100%; background: var(--bg); color: var(--text);
-    border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 14px; font-family: var(--sans);
-  }
+  input, textarea, select { width: 100%; background: var(--bg); color: var(--text); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 14px; font-family: var(--sans); }
   textarea { min-height: 92px; resize: vertical; font-family: var(--mono); font-size: 13px; }
   input:focus, textarea:focus, select:focus { outline: none; border-color: var(--accent); }
   .row { display: flex; gap: 12px; flex-wrap: wrap; }
   .row > * { flex: 1; min-width: 180px; }
-  .run { margin-top: 16px; }
-  .out {
-    margin-top: 18px; background: var(--bg); border: 1px solid var(--line); border-radius: 10px;
-    padding: 14px; font-family: var(--mono); font-size: 13px; white-space: pre-wrap; word-break: break-word;
-    max-height: 360px; overflow: auto; color: #d6dcea;
-  }
+  .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 16px; }
+  .out { margin-top: 18px; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 14px; font-family: var(--mono); font-size: 13px; white-space: pre-wrap; word-break: break-word; max-height: 380px; overflow: auto; color: #d6dcea; }
+  html[data-theme="light"] .out { color: #243047; }
   .out.empty { color: var(--muted); font-style: italic; }
   .hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
-  .muted { color: var(--muted); }
   .pill { display:inline-block; font-size:12px; padding:2px 8px; border-radius:999px; border:1px solid var(--line); margin:2px 4px 2px 0; }
-  .pill.good { color: var(--good); border-color: rgba(70,211,154,.4); }
-  .pill.warn { color: var(--warn); border-color: rgba(255,180,84,.4); }
-  .pill.bad  { color: var(--bad);  border-color: rgba(255,107,129,.4); }
+  .pill.good { color: var(--good); border-color: color-mix(in srgb, var(--good) 40%, transparent); }
+  .pill.warn { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 40%, transparent); }
+  .pill.bad  { color: var(--bad);  border-color: color-mix(in srgb, var(--bad) 40%, transparent); }
   .score-bar { height: 8px; border-radius: 999px; background: var(--panel-2); overflow: hidden; margin-top: 6px; }
   .score-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+  .copied { color: var(--good) !important; border-color: var(--good) !important; }
 
-  /* install */
+  /* cheatsheet */
+  .cmd { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); margin-bottom: 10px; }
+  .cmd code { font-family: var(--mono); font-size: 13px; color: var(--accent); background: var(--bg); padding: 4px 8px; border-radius: 6px; white-space: nowrap; }
+  .cmd .desc { color: var(--muted); font-size: 13px; flex: 1; }
+
   .codeblock { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 14px; font-family: var(--mono); font-size: 13px; color: #d6dcea; overflow:auto; }
+  html[data-theme="light"] .codeblock { color: #243047; }
   .codeblock .c { color: var(--muted); }
-
   footer { padding: 40px 0 60px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); }
   footer a { color: var(--accent); }
   .small { font-size: 12px; }
@@ -126,19 +117,21 @@
 
 <header class="nav">
   <div class="wrap nav-inner">
-    <div class="brand"><span class="dot"></span> raihan-toolkit</div>
+    <div class="brand"><span class="dot"></span> Toolkit Skills</div>
     <nav>
       <a class="navlink" href="#skills">Skills</a>
       <a class="navlink" href="#demo">Live demo</a>
+      <a class="navlink" href="#commands">Commands</a>
       <a class="navlink" href="#install">Install</a>
       <a class="navlink" href="https://github.com/theraihanrakibb/raihan-toolkit" target="_blank" rel="noopener">GitHub ↗</a>
+      <button class="theme-btn" id="themeToggle" title="Toggle light/dark">🌙</button>
     </nav>
   </div>
 </header>
 
 <div class="wrap">
   <section class="hero">
-    <h1>A <span class="grad">CodeBuddy Code</span> plugin for job-hunt &amp; build-in-public.</h1>
+    <h1><span class="grad">Toolkit Skills</span> — a CodeBuddy Code plugin for the job hunt &amp; build-in-public.</h1>
     <p class="lead">Five ready-to-use skills — portfolio audit, job application, PR drafting, AI-infra navigation, and multi-platform social content. Template-based, no API key, works offline. Try them right here.</p>
     <div class="cta">
       <a class="btn primary" href="#demo">▶ Try the live demo</a>
@@ -158,42 +151,12 @@
     <h2 class="section-title">The five skills</h2>
     <p class="section-sub">Each ships as a CodeBuddy skill (<code>SKILL.md</code>) and a slash command.</p>
     <div class="grid">
-      <div class="card">
-        <div class="ico">📊</div>
-        <h3>portfolio-audit</h3>
-        <p>Score your top GitHub repos against a 10-point quality bar and get a concrete fix plan (README, license, topics, Pages…).</p>
-        <span class="tag">/raihan-toolkit:audit-portfolio</span>
-      </div>
-      <div class="card">
-        <div class="ico">💼</div>
-        <h3>job-application</h3>
-        <p>Turn a JD + your resume into a cover letter, matched/missing keywords, interview questions, and a 7-day prep plan.</p>
-        <span class="tag">/raihan-toolkit:apply</span>
-      </div>
-      <div class="card">
-        <div class="ico">🔀</div>
-        <h3>pr-draft</h3>
-        <p>Paste a git diff → get a Conventional Commit message, PR description, and a changelog entry.</p>
-        <span class="tag">/raihan-toolkit:pr-draft</span>
-      </div>
-      <div class="card">
-        <div class="ico">🤖</div>
-        <h3>ai-infra-helper</h3>
-        <p>Navigate SGLang / vLLM-style repos: where models live, what tests to run, and fork-PR CI gotchas.</p>
-        <span class="tag">/raihan-toolkit:ai-infra-helper</span>
-      </div>
-      <div class="card">
-        <div class="ico">📣</div>
-        <h3>social-media</h3>
-        <p>One idea → posts for Facebook, Instagram, YouTube, X/Twitter, LinkedIn, and Gmail — with hashtags.</p>
-        <span class="tag">/raihan-toolkit:social</span>
-      </div>
-      <div class="card">
-        <div class="ico">✅</div>
-        <h3>Silent quality gate</h3>
-        <p>A hook denies git commits whose message contains an AI-generation trailer — clean history by default.</p>
-        <span class="tag">hooks/validate-commit.sh</span>
-      </div>
+      <div class="card"><div class="ico">📊</div><h3>portfolio-audit</h3><p>Score your top GitHub repos against a 10-point quality bar and get a concrete fix plan (README, license, topics, Pages…).</p><span class="tag">/raihan-toolkit:audit-portfolio</span></div>
+      <div class="card"><div class="ico">💼</div><h3>job-application</h3><p>Turn a JD + your resume into a cover letter, matched/missing keywords, interview questions, and a 7-day prep plan.</p><span class="tag">/raihan-toolkit:apply</span></div>
+      <div class="card"><div class="ico">🔀</div><h3>pr-draft</h3><p>Paste a git diff → get a Conventional Commit message, PR description, and a changelog entry.</p><span class="tag">/raihan-toolkit:pr-draft</span></div>
+      <div class="card"><div class="ico">🤖</div><h3>ai-infra-helper</h3><p>Navigate SGLang / vLLM-style repos: where models live, what tests to run, and fork-PR CI gotchas.</p><span class="tag">/raihan-toolkit:ai-infra-helper</span></div>
+      <div class="card"><div class="ico">📣</div><h3>social-media</h3><p>One idea → posts for Facebook, Instagram, YouTube, X/Twitter, LinkedIn, and Gmail — with hashtags.</p><span class="tag">/raihan-toolkit:social</span></div>
+      <div class="card"><div class="ico">✅</div><h3>Silent quality gate</h3><p>A hook denies git commits whose message contains an AI-generation trailer — clean history by default.</p><span class="tag">hooks/validate-commit.sh</span></div>
     </div>
   </section>
 
@@ -212,22 +175,30 @@
       <!-- SOCIAL -->
       <div class="tabpanel active" data-panel="social">
         <label for="social-idea">Your idea / topic</label>
-        <textarea id="social-idea">I built a CodeBuddy plugin that drafts social posts for 6 platforms from one idea.</textarea>
+        <textarea id="social-idea"></textarea>
         <label for="social-tone">Tone</label>
         <select id="social-tone">
           <option value="professional">Professional</option>
           <option value="casual">Casual</option>
           <option value="hype">Hype</option>
         </select>
-        <button class="btn primary run" data-run="social">Generate posts</button>
+        <div class="toolbar">
+          <button class="btn primary run" data-run="social">Generate posts</button>
+          <button class="btn ghost sm" data-example="social">Load example</button>
+          <button class="btn ghost sm" data-copy="social-out">Copy</button>
+        </div>
         <div class="out empty" id="social-out">Output will appear here.</div>
       </div>
 
       <!-- PORTFOLIO -->
       <div class="tabpanel" data-panel="portfolio">
         <label for="pf-user">GitHub username</label>
-        <input id="pf-user" value="theraihanrakibb" />
-        <button class="btn primary run" data-run="portfolio">Audit portfolio</button>
+        <input id="pf-user" />
+        <div class="toolbar">
+          <button class="btn primary run" data-run="portfolio">Audit portfolio</button>
+          <button class="btn ghost sm" data-example="portfolio">Load example</button>
+          <button class="btn ghost sm" data-copy="pf-out">Copy</button>
+        </div>
         <div class="hint">Calls the public GitHub API from your browser. Unauthenticated rate limit is 60 req/hr.</div>
         <div class="out empty" id="pf-out">Output will appear here.</div>
       </div>
@@ -237,41 +208,55 @@
         <div class="row">
           <div>
             <label for="apply-jd">Job description</label>
-            <textarea id="apply-jd">We are hiring a Backend Engineer at Acme to build Python services with FastAPI, Docker, and PostgreSQL. You will work on distributed systems and APIs.</textarea>
+            <textarea id="apply-jd"></textarea>
           </div>
           <div>
             <label for="apply-resume">Your resume / experience</label>
-            <textarea id="apply-resume">Built Python microservices with FastAPI and Docker. Worked on APIs and PostgreSQL-backed systems. Strong on testing and CI.</textarea>
+            <textarea id="apply-resume"></textarea>
           </div>
         </div>
-        <button class="btn primary run" data-run="apply">Generate application kit</button>
+        <div class="toolbar">
+          <button class="btn primary run" data-run="apply">Generate application kit</button>
+          <button class="btn ghost sm" data-example="apply">Load example</button>
+          <button class="btn ghost sm" data-copy="apply-out">Copy</button>
+        </div>
         <div class="out empty" id="apply-out">Output will appear here.</div>
       </div>
 
       <!-- PR -->
       <div class="tabpanel" data-panel="pr">
         <label for="pr-diff">Paste a git diff</label>
-        <textarea id="pr-diff">diff --git a/README.md b/README.md
-index 111..222 100644
---- a/README.md
-+++ b/README.md
-@@ -1,3 +1,5 @@
- # My Project
--A short description.
-+A short description with more detail about what it does.
-+Now with install instructions.</textarea>
-        <button class="btn primary run" data-run="pr">Draft PR</button>
+        <textarea id="pr-diff"></textarea>
+        <div class="toolbar">
+          <button class="btn primary run" data-run="pr">Draft PR</button>
+          <button class="btn ghost sm" data-example="pr">Load example</button>
+          <button class="btn ghost sm" data-copy="pr-out">Copy</button>
+        </div>
         <div class="out empty" id="pr-out">Output will appear here.</div>
       </div>
 
       <!-- AI INFRA -->
       <div class="tabpanel" data-panel="ai">
         <label for="ai-q">Question (try "where do I add a model in sglang?")</label>
-        <input id="ai-q" value="where do I add a new model in sglang?" />
-        <button class="btn primary run" data-run="ai">Ask</button>
+        <input id="ai-q" />
+        <div class="toolbar">
+          <button class="btn primary run" data-run="ai">Ask</button>
+          <button class="btn ghost sm" data-example="ai">Load example</button>
+          <button class="btn ghost sm" data-copy="ai-out">Copy</button>
+        </div>
         <div class="out empty" id="ai-out">Output will appear here.</div>
       </div>
     </div>
+  </section>
+
+  <section id="commands">
+    <h2 class="section-title">Command cheatsheet</h2>
+    <p class="section-sub">Every slash command the plugin registers. Click the icon to copy.</p>
+    <div class="cmd"><code id="c1">/raihan-toolkit:audit-portfolio</code><span class="desc">Audit a GitHub portfolio against the 10-point quality bar.</span><button class="btn ghost sm" data-copy-text="c1">⧉</button></div>
+    <div class="cmd"><code id="c2">/raihan-toolkit:apply</code><span class="desc">Generate a full job-application kit from a JD + resume.</span><button class="btn ghost sm" data-copy-text="c2">⧉</button></div>
+    <div class="cmd"><code id="c3">/raihan-toolkit:pr-draft</code><span class="desc">Draft a PR + Conventional Commit from a git diff.</span><button class="btn ghost sm" data-copy-text="c3">⧉</button></div>
+    <div class="cmd"><code id="c4">/raihan-toolkit:ai-infra-helper</code><span class="desc">Navigate SGLang / vLLM repos and their CI quirks.</span><button class="btn ghost sm" data-copy-text="c4">⧉</button></div>
+    <div class="cmd"><code id="c5">/raihan-toolkit:social</code><span class="desc">Generate social posts for 6 platforms from one idea.</span><button class="btn ghost sm" data-copy-text="c5">⧉</button></div>
   </section>
 
   <section id="install">
@@ -295,7 +280,7 @@ bash scripts/sync-to-cache.sh
 
   <footer>
     <div class="wrap">
-      <p><strong>raihan-toolkit</strong> — built for the job hunt and build-in-public. MIT licensed.</p>
+      <p><strong>Toolkit Skills</strong> — built for the job hunt and build-in-public. MIT licensed.</p>
       <p class="small">Live demo runs entirely client-side. Portfolio audit uses the public GitHub REST API. No data leaves your browser except the GitHub request you trigger.</p>
       <p class="small"><a href="https://github.com/theraihanrakibb/raihan-toolkit" target="_blank" rel="noopener">GitHub</a> · <a href="https://github.com/theraihanrakibb/raihan-toolkit/blob/main/README.md" target="_blank" rel="noopener">README</a> · <a href="https://github.com/theraihanrakibb/raihan-toolkit/blob/main/LICENSE" target="_blank" rel="noopener">License</a></p>
     </div>
@@ -303,10 +288,16 @@ bash scripts/sync-to-cache.sh
 </div>
 
 <script>
-// ------- tiny helpers -------
-const $ = (id) => document.getElementById(id);
-function setOut(id, text) { const el = $(id); el.textContent = text; el.classList.remove("empty"); }
-function elOut(id, html) { const el = $(id); el.innerHTML = html; el.classList.remove("empty"); }
+// ------- theme -------
+const root = document.documentElement;
+const themeBtn = $("themeToggle");
+function applyTheme(t){ root.setAttribute("data-theme", t); themeBtn.textContent = t === "dark" ? "🌙" : "☀️"; }
+applyTheme(localStorage.getItem("tk-theme") || "dark");
+themeBtn.addEventListener("click", () => {
+  const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  localStorage.setItem("tk-theme", next); applyTheme(next);
+});
+function $ (id){ return document.getElementById(id); }
 
 // ------- tabs -------
 document.querySelectorAll("#tabs .tab").forEach(btn => {
@@ -318,6 +309,54 @@ document.querySelectorAll("#tabs .tab").forEach(btn => {
   });
 });
 
+// ------- helpers -------
+function setOut(id, text){ const el = $(id); el.textContent = text; el.classList.remove("empty"); }
+function elOut(id, html){ const el = $(id); el.innerHTML = html; el.classList.remove("empty"); }
+function esc(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+// ------- copy buttons -------
+function flash(btn){ btn.classList.add("copied"); const t = btn.textContent; btn.textContent = "Copied!"; setTimeout(()=>{ btn.classList.remove("copied"); btn.textContent = t; }, 1200); }
+document.querySelectorAll("[data-copy]").forEach(btn => {
+  btn.addEventListener("click", async () => {
+    const el = $(btn.dataset.copy); if (!el || el.classList.contains("empty")) return;
+    try { await navigator.clipboard.writeText(el.textContent); flash(btn); }
+    catch(e){ /* clipboard blocked */ }
+  });
+});
+document.querySelectorAll("[data-copy-text]").forEach(btn => {
+  btn.addEventListener("click", async () => {
+    const el = $(btn.dataset.copyText); if (!el) return;
+    try { await navigator.clipboard.writeText(el.textContent); flash(btn); }
+    catch(e){}
+  });
+});
+
+// ------- examples -------
+const EXAMPLES = {
+  social: { idea: "I shipped a CLI that turns meeting notes into actionable todos using a local LLM — no cloud, fully private.", tone: "hype" },
+  portfolio: { user: "torvalds" },
+  apply: {
+    jd: "We are hiring a Senior Backend Engineer at Nimbus to build Python services with FastAPI, Docker, and PostgreSQL. You will design distributed systems and public APIs used by millions.",
+    resume: "Built Python microservices with FastAPI and Docker. Designed APIs and PostgreSQL-backed distributed systems. Strong on testing, observability, and CI."
+  },
+  pr: {
+    diff: "diff --git a/sglang/srt/models/mymodel.py b/sglang/srt/models/mymodel.py\nnew file mode 100644\n--- /dev/null\n+++ b/sglang/srt/models/mymodel.py\n@@ -0,0 +1,12 @@\n+class MyModel:\n+    def __init__(self, config):\n+        self.config = config\n+\n+    def forward(self, x):\n+        return x @ self.config.weight"
+  },
+  ai: { q: "how do I add a new model architecture in sglang?" }
+};
+document.querySelectorAll("[data-example]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const e = EXAMPLES[btn.dataset.example]; if (!e) return;
+    if (e.idea !== undefined) $("social-idea").value = e.idea;
+    if (e.tone !== undefined) $("social-tone").value = e.tone;
+    if (e.user !== undefined) $("pf-user").value = e.user;
+    if (e.jd !== undefined) $("apply-jd").value = e.jd;
+    if (e.resume !== undefined) $("apply-resume").value = e.resume;
+    if (e.diff !== undefined) $("pr-diff").value = e.diff;
+    if (e.q !== undefined) $("ai-q").value = e.q;
+  });
+});
+
 // ------- skill logic (ported from backend/skills.py) -------
 function extractKeywords(text) {
   const stop = new Set(["the","and","for","with","you","our","will","this","that","from","have","are","your","who","what","how","why"]);
@@ -326,7 +365,6 @@ function extractKeywords(text) {
   for (const t of toks) { const l = t.toLowerCase(); if (stop.has(l) || seen.has(l)) continue; seen.add(l); out.push(t); }
   return out.slice(0, 12);
 }
-function esc(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
 // 1. social
 function social(idea, tone) {
@@ -353,7 +391,6 @@ async function portfolio(username) {
   if (!repos.length) return "No public repos found for that user.";
   let html = `<strong>Top ${repos.length} repos for @${esc(username)}</strong>\n`;
   for (const r of repos) {
-    const readme = true; // cheap heuristic: assume present; score reflects what we can see
     const licenseOk = !!r.license;
     const topics = r.topics || [];
     const desc = r.description || "";
@@ -363,8 +400,7 @@ async function portfolio(username) {
     const stars = r.stargazers_count || 0;
     const archived = !!r.archived;
     const homepage = r.homepage || "";
-    let score = 0;
-    score += 1; // readme assumed
+    let score = 1; // readme assumed present (cheap heuristic)
     score += licenseOk ? 1 : 0;
     score += topics.length ? 1 : 0;
     score += desc ? 1 : 0;
@@ -403,7 +439,7 @@ function apply(jd, resume) {
   const company = companyM ? companyM[1].trim() : "your company";
   const roleM = jd.match(/\b(Engineer|Developer|Intern|Lead|Architect|Scientist)[A-Za-z ]{0,30}/);
   const role = roleM ? roleM[0].trim() : "the role";
-  const cover = `Dear Hiring Team at ${company},\n\nI'm writing to apply for ${role}. The job description emphasizes ${jdK.slice(0,3).join(", ")}${jdK.length?'':''}, which aligns directly with my background.\n\nIn my recent work, I have focused on ${matched.slice(0,3).join(", ") || 'building production systems'}, with attention to reliability and measurable impact. I'm confident I can contribute to ${company}'s goals from day one.\n\nI'm especially drawn to ${company} because of its engineering culture and the problems the team is solving. I'd welcome the chance to discuss how my experience maps to your needs.\n\nThank you for your time and consideration.\n\nBest regards,\n[Your Name]`;
+  const cover = `Dear Hiring Team at ${company},\n\nI'm writing to apply for ${role}. The job description emphasizes ${jdK.slice(0,3).join(", ") || "key skills"}, which aligns directly with my background.\n\nIn my recent work, I have focused on ${matched.slice(0,3).join(", ") || 'building production systems'}, with attention to reliability and measurable impact. I'm confident I can contribute to ${company}'s goals from day one.\n\nI'm especially drawn to ${company} because of its engineering culture and the problems the team is solving. I'd welcome the chance to discuss how my experience maps to your needs.\n\nThank you for your time and consideration.\n\nBest regards,\n[Your Name]`;
   const iq = [
     ...matched.slice(0,3).map(k=>`Walk me through a project where you used ${k}.`),
     "Tell me about a time you debugged a hard issue under pressure.",
@@ -454,11 +490,12 @@ function aiInfra(q) {
   return `Question doesn't match SGLang or vLLM. Try asking about 'sglang', 'vllm', 'where to add a model', or 'what tests to run'.`;
 }
 
-// ------- wire up run buttons -------
+// ------- run buttons -------
+const RUN_LABELS = { social: "Generate posts", portfolio: "Audit portfolio", apply: "Generate application kit", pr: "Draft PR", ai: "Ask" };
 document.querySelectorAll("[data-run]").forEach(btn => {
   btn.addEventListener("click", async () => {
     const kind = btn.dataset.run;
-    btn.disabled = true; btn.textContent = "Working…";
+    btn.disabled = true; const orig = btn.textContent; btn.textContent = "Working…";
     try {
       if (kind === "social") setOut("social-out", social($("social-idea").value, $("social-tone").value));
       else if (kind === "portfolio") elOut("pf-out", await portfolio($("pf-user").value.trim()));
@@ -468,10 +505,17 @@ document.querySelectorAll("[data-run]").forEach(btn => {
     } catch (e) {
       setOut(kind === "portfolio" ? "pf-out" : kind+"-out", "Error: " + e.message);
     } finally {
-      btn.disabled = false; btn.textContent = btn.dataset.run === "social" ? "Generate posts" : btn.dataset.run === "portfolio" ? "Audit portfolio" : btn.dataset.run === "apply" ? "Generate application kit" : btn.dataset.run === "pr" ? "Draft PR" : "Ask";
+      btn.disabled = false; btn.textContent = orig;
     }
   });
 });
+
+// preload example values on first load so panels aren't empty
+document.querySelector('[data-example="social"]').click();
+document.querySelector('[data-example="portfolio"]').click();
+document.querySelector('[data-example="apply"]').click();
+document.querySelector('[data-example="pr"]').click();
+document.querySelector('[data-example="ai"]').click();
 </script>
 </body>
 </html>
