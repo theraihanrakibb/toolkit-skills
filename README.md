@@ -7,7 +7,7 @@
 
 > A CodeBuddy Code plugin bundle (plugin id: `toolkit-skills`): 5 skills + 5 slash commands + 1 git-commit guard. Tailored for job-hunt, AI-infra, public-repos, and content creation workflows. Ships with a full-stack web UI (FastAPI + React) that wraps every skill as an HTTP endpoint.
 
-**▶ Live demo:** https://theraihanrakibb.github.io/toolkit-skills/
+**▶ Live web app:** https://frontend-xi-amber-68.vercel.app  ·  **▶ Static demo:** https://theraihanrakibb.github.io/toolkit-skills/
 
 ## Skills & Commands
 
