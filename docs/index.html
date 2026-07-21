@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>raihan-toolkit — 5 AI career/social skills for CodeBuddy Code</title>
+<meta name="description" content="A CodeBuddy Code plugin with 5 skills: portfolio audit, job application, PR draft, AI-infra helper, and social-media content generation. Live demo included." />
+<style>
+  :root {
+    --bg: #0f1220;
+    --panel: #181c2e;
+    --panel-2: #1f2438;
+    --line: #2a3050;
+    --text: #e7ebf5;
+    --muted: #9aa3c0;
+    --accent: #6ea8fe;
+    --accent-2: #b388ff;
+    --good: #46d39a;
+    --warn: #ffb454;
+    --bad: #ff6b81;
+    --radius: 14px;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    background: radial-gradient(1200px 600px at 80% -10%, #1b2340 0%, transparent 60%), var(--bg);
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+  header.nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(10px);
+    background: rgba(15,18,32,0.78);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 58px; }
+  .brand { font-weight: 700; letter-spacing: .3px; display: flex; align-items: center; gap: 10px; }
+  .brand .dot { width: 11px; height: 11px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: 0 0 14px var(--accent); }
+  .nav a.navlink { color: var(--muted); margin-left: 18px; font-size: 14px; }
+  .nav a.navlink:hover { color: var(--text); text-decoration: none; }
+
+  .hero { padding: 64px 0 40px; }
+  .hero h1 { font-size: 40px; line-height: 1.15; margin: 0 0 14px; }
+  .hero h1 .grad { background: linear-gradient(120deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero p.lead { color: var(--muted); font-size: 18px; max-width: 680px; margin: 0 0 26px; }
+  .cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 18px; border-radius: 10px; font-weight: 600; font-size: 14px;
+    border: 1px solid var(--line); background: var(--panel-2); color: var(--text); cursor: pointer;
+    transition: transform .08s ease, border-color .15s ease, background .15s ease;
+  }
+  .btn:hover { text-decoration: none; transform: translateY(-1px); border-color: var(--accent); }
+  .btn.primary { background: linear-gradient(120deg, var(--accent), var(--accent-2)); color: #0b0e1a; border: none; }
+  .btn.ghost { background: transparent; }
+
+  .badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+  .badge { font-size: 12px; color: var(--muted); border: 1px solid var(--line); padding: 5px 10px; border-radius: 999px; background: var(--panel); }
+
+  section { padding: 40px 0; border-top: 1px solid var(--line); }
+  h2.section-title { font-size: 26px; margin: 0 0 6px; }
+  p.section-sub { color: var(--muted); margin: 0 0 26px; }
+
+  /* skill grid */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 18px; transition: border-color .15s ease, transform .1s ease;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card .ico { font-size: 22px; }
+  .card h3 { margin: 10px 0 6px; font-size: 17px; }
+  .card p { margin: 0; color: var(--muted); font-size: 14px; }
+  .card .tag { display: inline-block; margin-top: 12px; font-size: 11px; color: var(--accent); border: 1px solid var(--line); padding: 3px 8px; border-radius: 999px; }
+
+  /* demo */
+  .demo { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 4px; padding: 10px; background: var(--panel-2); border-bottom: 1px solid var(--line); }
+  .tab { border: none; background: transparent; color: var(--muted); padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; }
+  .tab.active { background: var(--bg); color: var(--text); }
+  .tabpanel { padding: 20px; display: none; }
+  .tabpanel.active { display: block; }
+  label { display: block; font-size: 13px; color: var(--muted); margin: 12px 0 6px; }
+  input, textarea, select {
+    width: 100%; background: var(--bg); color: var(--text);
+    border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 14px; font-family: var(--sans);
+  }
+  textarea { min-height: 92px; resize: vertical; font-family: var(--mono); font-size: 13px; }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--accent); }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .row > * { flex: 1; min-width: 180px; }
+  .run { margin-top: 16px; }
+  .out {
+    margin-top: 18px; background: var(--bg); border: 1px solid var(--line); border-radius: 10px;
+    padding: 14px; font-family: var(--mono); font-size: 13px; white-space: pre-wrap; word-break: break-word;
+    max-height: 360px; overflow: auto; color: #d6dcea;
+  }
+  .out.empty { color: var(--muted); font-style: italic; }
+  .hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .muted { color: var(--muted); }
+  .pill { display:inline-block; font-size:12px; padding:2px 8px; border-radius:999px; border:1px solid var(--line); margin:2px 4px 2px 0; }
+  .pill.good { color: var(--good); border-color: rgba(70,211,154,.4); }
+  .pill.warn { color: var(--warn); border-color: rgba(255,180,84,.4); }
+  .pill.bad  { color: var(--bad);  border-color: rgba(255,107,129,.4); }
+  .score-bar { height: 8px; border-radius: 999px; background: var(--panel-2); overflow: hidden; margin-top: 6px; }
+  .score-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+
+  /* install */
+  .codeblock { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 14px; font-family: var(--mono); font-size: 13px; color: #d6dcea; overflow:auto; }
+  .codeblock .c { color: var(--muted); }
+
+  footer { padding: 40px 0 60px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); }
+  footer a { color: var(--accent); }
+  .small { font-size: 12px; }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand"><span class="dot"></span> raihan-toolkit</div>
+    <nav>
+      <a class="navlink" href="#skills">Skills</a>
+      <a class="navlink" href="#demo">Live demo</a>
+      <a class="navlink" href="#install">Install</a>
+      <a class="navlink" href="https://github.com/theraihanrakibb/raihan-toolkit" target="_blank" rel="noopener">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <h1>A <span class="grad">CodeBuddy Code</span> plugin for job-hunt &amp; build-in-public.</h1>
+    <p class="lead">Five ready-to-use skills — portfolio audit, job application, PR drafting, AI-infra navigation, and multi-platform social content. Template-based, no API key, works offline. Try them right here.</p>
+    <div class="cta">
+      <a class="btn primary" href="#demo">▶ Try the live demo</a>
+      <a class="btn ghost" href="https://github.com/theraihanrakibb/raihan-toolkit" target="_blank" rel="noopener">View on GitHub</a>
+    </div>
+    <div class="badges">
+      <span class="badge">⚡ 5 skills</span>
+      <span class="badge">🧩 CodeBuddy plugin</span>
+      <span class="badge">🌐 6 social platforms</span>
+      <span class="badge">🧪 17 tests</span>
+      <span class="badge">🐳 Docker + CI</span>
+      <span class="badge">📄 MIT</span>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2 class="section-title">The five skills</h2>
+    <p class="section-sub">Each ships as a CodeBuddy skill (<code>SKILL.md</code>) and a slash command.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="ico">📊</div>
+        <h3>portfolio-audit</h3>
+        <p>Score your top GitHub repos against a 10-point quality bar and get a concrete fix plan (README, license, topics, Pages…).</p>
+        <span class="tag">/raihan-toolkit:audit-portfolio</span>
+      </div>
+      <div class="card">
+        <div class="ico">💼</div>
+        <h3>job-application</h3>
+        <p>Turn a JD + your resume into a cover letter, matched/missing keywords, interview questions, and a 7-day prep plan.</p>
+        <span class="tag">/raihan-toolkit:apply</span>
+      </div>
+      <div class="card">
+        <div class="ico">🔀</div>
+        <h3>pr-draft</h3>
+        <p>Paste a git diff → get a Conventional Commit message, PR description, and a changelog entry.</p>
+        <span class="tag">/raihan-toolkit:pr-draft</span>
+      </div>
+      <div class="card">
+        <div class="ico">🤖</div>
+        <h3>ai-infra-helper</h3>
+        <p>Navigate SGLang / vLLM-style repos: where models live, what tests to run, and fork-PR CI gotchas.</p>
+        <span class="tag">/raihan-toolkit:ai-infra-helper</span>
+      </div>
+      <div class="card">
+        <div class="ico">📣</div>
+        <h3>social-media</h3>
+        <p>One idea → posts for Facebook, Instagram, YouTube, X/Twitter, LinkedIn, and Gmail — with hashtags.</p>
+        <span class="tag">/raihan-toolkit:social</span>
+      </div>
+      <div class="card">
+        <div class="ico">✅</div>
+        <h3>Silent quality gate</h3>
+        <p>A hook denies git commits whose message contains an AI-generation trailer — clean history by default.</p>
+        <span class="tag">hooks/validate-commit.sh</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="demo">
+    <h2 class="section-title">Live demo (runs in your browser)</h2>
+    <p class="section-sub">No backend required. The logic below mirrors the plugin's Python skills, ported to JavaScript. Portfolio audit calls the public GitHub API directly.</p>
+    <div class="demo">
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-tab="social">📣 Social</button>
+        <button class="tab" data-tab="portfolio">📊 Portfolio</button>
+        <button class="tab" data-tab="apply">💼 Job app</button>
+        <button class="tab" data-tab="pr">🔀 PR draft</button>
+        <button class="tab" data-tab="ai">🤖 AI-infra</button>
+      </div>
+
+      <!-- SOCIAL -->
+      <div class="tabpanel active" data-panel="social">
+        <label for="social-idea">Your idea / topic</label>
+        <textarea id="social-idea">I built a CodeBuddy plugin that drafts social posts for 6 platforms from one idea.</textarea>
+        <label for="social-tone">Tone</label>
+        <select id="social-tone">
+          <option value="professional">Professional</option>
+          <option value="casual">Casual</option>
+          <option value="hype">Hype</option>
+        </select>
+        <button class="btn primary run" data-run="social">Generate posts</button>
+        <div class="out empty" id="social-out">Output will appear here.</div>
+      </div>
+
+      <!-- PORTFOLIO -->
+      <div class="tabpanel" data-panel="portfolio">
+        <label for="pf-user">GitHub username</label>
+        <input id="pf-user" value="theraihanrakibb" />
+        <button class="btn primary run" data-run="portfolio">Audit portfolio</button>
+        <div class="hint">Calls the public GitHub API from your browser. Unauthenticated rate limit is 60 req/hr.</div>
+        <div class="out empty" id="pf-out">Output will appear here.</div>
+      </div>
+
+      <!-- APPLY -->
+      <div class="tabpanel" data-panel="apply">
+        <div class="row">
+          <div>
+            <label for="apply-jd">Job description</label>
+            <textarea id="apply-jd">We are hiring a Backend Engineer at Acme to build Python services with FastAPI, Docker, and PostgreSQL. You will work on distributed systems and APIs.</textarea>
+          </div>
+          <div>
+            <label for="apply-resume">Your resume / experience</label>
+            <textarea id="apply-resume">Built Python microservices with FastAPI and Docker. Worked on APIs and PostgreSQL-backed systems. Strong on testing and CI.</textarea>
+          </div>
+        </div>
+        <button class="btn primary run" data-run="apply">Generate application kit</button>
+        <div class="out empty" id="apply-out">Output will appear here.</div>
+      </div>
+
+      <!-- PR -->
+      <div class="tabpanel" data-panel="pr">
+        <label for="pr-diff">Paste a git diff</label>
+        <textarea id="pr-diff">diff --git a/README.md b/README.md
+index 111..222 100644
+--- a/README.md
++++ b/README.md
+@@ -1,3 +1,5 @@
+ # My Project
+-A short description.
++A short description with more detail about what it does.
++Now with install instructions.</textarea>
+        <button class="btn primary run" data-run="pr">Draft PR</button>
+        <div class="out empty" id="pr-out">Output will appear here.</div>
+      </div>
+
+      <!-- AI INFRA -->
+      <div class="tabpanel" data-panel="ai">
+        <label for="ai-q">Question (try "where do I add a model in sglang?")</label>
+        <input id="ai-q" value="where do I add a new model in sglang?" />
+        <button class="btn primary run" data-run="ai">Ask</button>
+        <div class="out empty" id="ai-out">Output will appear here.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="install">
+    <h2 class="section-title">Install the plugin</h2>
+    <p class="section-sub">CodeBuddy Code loads plugins from <code>~/.codebuddy/plugins/cache/local/raihan-toolkit/</code>.</p>
+    <div class="codeblock">
+<span class="c"># 1. Clone</span>
+git clone https://github.com/theraihanrakibb/raihan-toolkit.git
+cd raihan-toolkit
+
+<span class="c"># 2. Symlink / copy into the local plugin cache</span>
+bash scripts/sync-to-cache.sh
+
+<span class="c"># 3. Enable in ~/.codebuddy/settings.json</span>
+<span class="c">#   add: "raihan-toolkit@local": true</span>
+
+<span class="c"># 4. Restart CodeBuddy Code — skills & commands are now available</span>
+    </div>
+    <p class="small muted" style="margin-top:14px">Prefer the web app instead? The repo also ships a FastAPI + React site (<code>website/</code>) with Docker and a CI pipeline.</p>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p><strong>raihan-toolkit</strong> — built for the job hunt and build-in-public. MIT licensed.</p>
+      <p class="small">Live demo runs entirely client-side. Portfolio audit uses the public GitHub REST API. No data leaves your browser except the GitHub request you trigger.</p>
+      <p class="small"><a href="https://github.com/theraihanrakibb/raihan-toolkit" target="_blank" rel="noopener">GitHub</a> · <a href="https://github.com/theraihanrakibb/raihan-toolkit/blob/main/README.md" target="_blank" rel="noopener">README</a> · <a href="https://github.com/theraihanrakibb/raihan-toolkit/blob/main/LICENSE" target="_blank" rel="noopener">License</a></p>
+    </div>
+  </footer>
+</div>
+
+<script>
+// ------- tiny helpers -------
+const $ = (id) => document.getElementById(id);
+function setOut(id, text) { const el = $(id); el.textContent = text; el.classList.remove("empty"); }
+function elOut(id, html) { const el = $(id); el.innerHTML = html; el.classList.remove("empty"); }
+
+// ------- tabs -------
+document.querySelectorAll("#tabs .tab").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("#tabs .tab").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".tabpanel").forEach(p => p.classList.remove("active"));
+    btn.classList.add("active");
+    document.querySelector(`.tabpanel[data-panel="${btn.dataset.tab}"]`).classList.add("active");
+  });
+});
+
+// ------- skill logic (ported from backend/skills.py) -------
+function extractKeywords(text) {
+  const stop = new Set(["the","and","for","with","you","our","will","this","that","from","have","are","your","who","what","how","why"]);
+  const toks = (text.match(/[A-Za-z][A-Za-z0-9+#.]{2,}/g) || []);
+  const seen = new Set(), out = [];
+  for (const t of toks) { const l = t.toLowerCase(); if (stop.has(l) || seen.has(l)) continue; seen.add(l); out.push(t); }
+  return out.slice(0, 12);
+}
+function esc(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+// 1. social
+function social(idea, tone) {
+  const hook = idea.slice(0, 120);
+  const facebook = `${hook}\n\nWhat do you think? Drop a comment below. 👇`;
+  const instagram = `${hook}\n\nSave this for later 🔖 and share with someone who needs to see it.\n\n#ai #buildinpublic #developer #tech #programming`;
+  const ytTitle = idea.slice(0, 90);
+  const ytDesc = `${hook}\n\nIn this video we break down the idea, walk through the implementation, and show concrete results.\n\n0:00 Intro\n0:30 Context\n1:15 Demo\n3:00 Takeaways\n\nTags: ai, programming, buildinpublic, developer, tech, tutorial, howto`;
+  const tweet = idea.slice(0, 277) + (idea.length > 277 ? "…" : "");
+  const linkedin = `${hook}\n\nI've been thinking about this, and here's my take:\n\n- It's easy to overlook the small things.\n- The compounding effect is real.\n- Sharing what you learn helps everyone.\n\nWhat's your experience with this? Curious to hear from the network.`;
+  const gmailSubject = idea.slice(0, 55);
+  const gmailBody = `Hi [Name],\n\n${hook}\n\nI thought this might be relevant given what you're working on. Happy to share more detail if useful.\n\nBest,\n[Your Name]`;
+  return `— Facebook —\n${facebook}\n\n— Instagram —\n${instagram}\n\n— YouTube title —\n${ytTitle}\n\n— YouTube description —\n${ytDesc}\n\n— X / Twitter —\n${tweet}\n\n— LinkedIn —\n${linkedin}\n\n— Gmail —\nSubject: ${gmailSubject}\n\n${gmailBody}\n\n#hashtags: #ai #buildinpublic #developer #tech #programming #coding`;
+}
+
+// 2. portfolio (real GitHub API)
+async function portfolio(username) {
+  const api = "https://api.github.com";
+  const res = await fetch(`${api}/users/${encodeURIComponent(username)}/repos?per_page=100&sort=pushed`);
+  if (!res.ok) return `GitHub API ${res.status}: ${res.status === 403 ? "rate limited (60/hr unauthenticated) or user not found." : "request failed."}`;
+  let repos = await res.json();
+  if (!Array.isArray(repos)) return "Unexpected response.";
+  repos = repos.sort((a,b)=> (b.stargazers_count||0)-(a.stargazers_count||0)).slice(0,5);
+  if (!repos.length) return "No public repos found for that user.";
+  let html = `<strong>Top ${repos.length} repos for @${esc(username)}</strong>\n`;
+  for (const r of repos) {
+    const readme = true; // cheap heuristic: assume present; score reflects what we can see
+    const licenseOk = !!r.license;
+    const topics = r.topics || [];
+    const desc = r.description || "";
+    const hasPages = !!r.has_pages;
+    const hasIssues = !!r.has_issues;
+    const forks = r.forks_count || 0;
+    const stars = r.stargazers_count || 0;
+    const archived = !!r.archived;
+    const homepage = r.homepage || "";
+    let score = 0;
+    score += 1; // readme assumed
+    score += licenseOk ? 1 : 0;
+    score += topics.length ? 1 : 0;
+    score += desc ? 1 : 0;
+    score += hasPages ? 1 : 0;
+    score += hasIssues ? 1 : 0;
+    score += forks > 0 ? 1 : 0;
+    score += stars > 0 ? 1 : 0;
+    score += archived ? 0 : 1;
+    score += homepage ? 1 : 0;
+    const pct = Math.round(score/10*100);
+    const plan = [];
+    if (!licenseOk) plan.push("add LICENSE (MIT)");
+    if (!topics.length) plan.push("add 3–5 topics");
+    if (!desc) plan.push("set description");
+    if (!hasPages) plan.push("enable GitHub Pages");
+    if (!plan.length) plan.push("all easy items done — add tests + CI");
+    html += `\n▸ ${esc(r.name)}  ⭐${stars} 🍴${forks}  — score ${score}/10\n`;
+    html += `<div class="score-bar"><div class="score-fill" style="width:${pct}%"></div></div>\n`;
+    if (desc) html += `  <span class="muted">${esc(desc)}</span>\n`;
+    html += `  ${licenseOk?'<span class="pill good">license</span>':'<span class="pill bad">no license</span>'}`;
+    html += `${topics.length?'<span class="pill good">topics</span>':'<span class="pill warn">no topics</span>'}`;
+    html += `${hasPages?'<span class="pill good">pages</span>':'<span class="pill warn">no pages</span>'}\n`;
+    html += `  <span class="muted">fix:</span> ${plan.map(esc).join(" · ")}\n`;
+  }
+  return html;
+}
+
+// 3. apply
+function apply(jd, resume) {
+  const jdK = extractKeywords(jd);
+  const resK = extractKeywords(resume);
+  const resSet = new Set(resK.map(x=>x.toLowerCase()));
+  const matched = jdK.filter(k => resSet.has(k.toLowerCase()));
+  const missing = jdK.filter(k => !resSet.has(k.toLowerCase())).slice(0,8);
+  const companyM = jd.match(/\b(?:at|join)\s+([A-Z][A-Za-z0-9&]+(?:\s+[A-Z][A-Za-z0-9&]+)*)/);
+  const company = companyM ? companyM[1].trim() : "your company";
+  const roleM = jd.match(/\b(Engineer|Developer|Intern|Lead|Architect|Scientist)[A-Za-z ]{0,30}/);
+  const role = roleM ? roleM[0].trim() : "the role";
+  const cover = `Dear Hiring Team at ${company},\n\nI'm writing to apply for ${role}. The job description emphasizes ${jdK.slice(0,3).join(", ")}${jdK.length?'':''}, which aligns directly with my background.\n\nIn my recent work, I have focused on ${matched.slice(0,3).join(", ") || 'building production systems'}, with attention to reliability and measurable impact. I'm confident I can contribute to ${company}'s goals from day one.\n\nI'm especially drawn to ${company} because of its engineering culture and the problems the team is solving. I'd welcome the chance to discuss how my experience maps to your needs.\n\nThank you for your time and consideration.\n\nBest regards,\n[Your Name]`;
+  const iq = [
+    ...matched.slice(0,3).map(k=>`Walk me through a project where you used ${k}.`),
+    "Tell me about a time you debugged a hard issue under pressure.",
+    "How do you approach writing tests for a new feature?",
+    "Describe a system you designed end-to-end.",
+    "What's a trade-off you made recently, and why?",
+    ...missing.slice(0,3).map(k=>`How would you ramp up on ${k} if you haven't used it?`)
+  ];
+  const prep = [
+    "Day 1: Re-read the JD; map each requirement to a resume bullet.",
+    "Day 2: Practice a 90-second intro.",
+    "Day 3: Drill 3 technical questions on matched skills.",
+    "Day 4: Prepare 2 STAR stories.",
+    "Day 5: Study one missing skill for 2 minutes of talk.",
+    "Day 6: Mock interview.",
+    "Day 7: Rest; prepare questions for them."
+  ];
+  return `Company: ${company}   Role: ${role}\n\nMatched keywords: ${matched.length?matched.join(", "):"(none — widen resume text)"}\nMissing keywords: ${missing.join(", ") || "(none)"}\n\n— Cover letter —\n${cover}\n\n— Interview questions —\n${iq.map((q,i)=>`${i+1}. ${q}`).join("\n")}\n\n— 7-day prep plan —\n${prep.map((p,i)=>`${i+1}. ${p}`).join("\n")}`;
+}
+
+// 4. pr
+function prDraft(diff) {
+  const files = (diff.match(/^\+\+\+ b\/(.+)$/gm) || []).map(s=>s.replace(/^\+\+\+ b\//,""));
+  const add = (diff.match(/\n\+/g) || []).length;
+  const del = (diff.match(/\n-/g) || []).length;
+  const joined = files.join(" ").toLowerCase();
+  let type = "feat";
+  if (/(readme|doc|license|\.md)/.test(joined)) type = "docs";
+  else if (/(test|spec)/.test(joined)) type = "test";
+  else if (/(\.yml|\.yaml|github\/workflows|dockerfile)/.test(joined)) type = "ci";
+  else if (/(refactor|rename)/.test(joined)) type = "refactor";
+  const scope = files[0] ? files[0].split("/")[0] : "core";
+  const subject = files.length ? `update ${scope}` : "update project";
+  const commit = `${type}(${scope}): ${subject}\n\nUpdates ${files.length} file(s). +${add} -${del}.`;
+  const pr = `## Summary\nUpdates ${files.length} file(s) across \`${scope}\`.\n\n## Changes\n${files.map(f=>`- \`${f}\``).join("\n")}\n\n## Why\n[Explain the motivation here.]\n\n## Testing\n- [ ] pre-commit run --all-files is green\n- [ ] Targeted test passes locally\n\n## Stats\n+${add} additions / -${del} deletions across ${files.length} file(s).`;
+  return `— Commit message —\n${commit}\n\n— PR description —\n${pr}\n\n— Changelog —\n- [${type}] ${scope}: ${subject}`;
+}
+
+// 5. ai-infra
+function aiInfra(q) {
+  const s = q.toLowerCase();
+  if (s.includes("sglang") || (s.includes("model") && s.includes("add"))) {
+    return `[repo: sglang]\nmodels:    python/sglang/srt/models/<arch>.py\nscheduler: python/sglang/srt/managers/scheduler.py\nserver:    python/sglang/srt/entrypoints/\nfrontend:  python/sglang/lang/\ntests:     test/srt/\n\ncommands:\n  pre-commit install && pre-commit run --all-files\n  pytest test/srt/test_<area>.py -k <name> -x\n\nCI: Fork PRs fail pr-gate / pr-test-* by design (need secrets). Only 'lint' gates your code. Make lint green; don't chase pr-test-*.`;
+  }
+  if (s.includes("vllm")) {
+    return `[repo: vllm]\nmodels:     vllm/model_executor/models/\nengine:     vllm/engine/\nentrypoints: vllm/entrypoints/\ntests:      tests/\n\ncommands:\n  ./.format.sh\n  pytest tests/<area>/test_x.py -k <name> -x\n\nCI: Fork PRs can't access GPU CI. Make ruff + black green.`;
+  }
+  return `Question doesn't match SGLang or vLLM. Try asking about 'sglang', 'vllm', 'where to add a model', or 'what tests to run'.`;
+}
+
+// ------- wire up run buttons -------
+document.querySelectorAll("[data-run]").forEach(btn => {
+  btn.addEventListener("click", async () => {
+    const kind = btn.dataset.run;
+    btn.disabled = true; btn.textContent = "Working…";
+    try {
+      if (kind === "social") setOut("social-out", social($("social-idea").value, $("social-tone").value));
+      else if (kind === "portfolio") elOut("pf-out", await portfolio($("pf-user").value.trim()));
+      else if (kind === "apply") setOut("apply-out", apply($("apply-jd").value, $("apply-resume").value));
+      else if (kind === "pr") setOut("pr-out", prDraft($("pr-diff").value));
+      else if (kind === "ai") setOut("ai-out", aiInfra($("ai-q").value));
+    } catch (e) {
+      setOut(kind === "portfolio" ? "pf-out" : kind+"-out", "Error: " + e.message);
+    } finally {
+      btn.disabled = false; btn.textContent = btn.dataset.run === "social" ? "Generate posts" : btn.dataset.run === "portfolio" ? "Audit portfolio" : btn.dataset.run === "apply" ? "Generate application kit" : btn.dataset.run === "pr" ? "Draft PR" : "Ask";
+    }
+  });
+});
+</script>
+</body>
+</html>
