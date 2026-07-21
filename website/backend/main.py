@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import os
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
@@ -87,6 +87,37 @@ def ai_infra_endpoint(req: AiInfraRequest):
 def social_endpoint(req: SocialRequest):
     """Draft content for FB/IG/YouTube/X/LinkedIn/Gmail from one idea."""
     return social(req.idea, req.tone)
+
+
+class ApiDispatch(BaseModel):
+    """Unified dispatch body used by the Vercel serverless function AND the
+    frontend in production/dev (POST /api with {action: ...})."""
+    action: str
+    username: str | None = None
+    max_repos: int = 5
+    jd: str | None = None
+    resume: str | None = None
+    diff: str | None = None
+    question: str | None = None
+    idea: str | None = None
+    tone: str = "professional"
+
+
+@app.post("/api")
+async def api_dispatch(req: ApiDispatch):
+    """Single entrypoint mirroring the Vercel serverless function's interface."""
+    action = req.action
+    if action == "audit-portfolio":
+        return await audit_portfolio(req.username or "", req.max_repos)
+    if action == "apply":
+        return apply(req.jd or "", req.resume or "")
+    if action == "pr-draft":
+        return pr_draft(req.diff or "")
+    if action == "ai-infra-helper":
+        return ai_infra_helper(req.question or "")
+    if action == "social":
+        return social(req.idea or "", req.tone)
+    raise HTTPException(status_code=400, detail=f"unknown action: {action}")
 
 
 if __name__ == "__main__":
