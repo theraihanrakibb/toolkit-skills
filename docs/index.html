@@ -262,6 +262,9 @@
     <div class="cmd"><code id="c3">/raihan-toolkit:pr-draft</code><span class="desc">Draft a PR + Conventional Commit from a git diff.</span><button class="btn ghost sm" data-copy-text="c3">⧉</button></div>
     <div class="cmd"><code id="c4">/raihan-toolkit:ai-infra-helper</code><span class="desc">Navigate SGLang / vLLM repos and their CI quirks.</span><button class="btn ghost sm" data-copy-text="c4">⧉</button></div>
     <div class="cmd"><code id="c5">/raihan-toolkit:social</code><span class="desc">Generate social posts for 6 platforms from one idea.</span><button class="btn ghost sm" data-copy-text="c5">⧉</button></div>
+    <div class="toolbar" style="margin-top:14px">
+      <button class="btn ghost sm" id="dlCheatsheet">Download cheatsheet .md</button>
+    </div>
   </section>
 
   <section id="install">
@@ -348,6 +351,22 @@ document.querySelectorAll("[data-download]").forEach(btn => {
     a.href = url; a.download = name; document.body.appendChild(a); a.click();
     document.body.removeChild(a); URL.revokeObjectURL(url);
   });
+});
+
+// ------- download cheatsheet as .md -------
+$("dlCheatsheet").addEventListener("click", () => {
+  const lines = ["# Toolkit Skills — Command Cheatsheet", "", "Plugin id: `raihan-toolkit`", ""];
+  document.querySelectorAll("#commands .cmd").forEach(c => {
+    const cmd = c.querySelector("code").textContent.trim();
+    const desc = c.querySelector(".desc").textContent.trim();
+    lines.push(`- \`${cmd}\` — ${desc}`);
+  });
+  lines.push("", "> Generated from the live demo at https://theraihanrakibb.github.io/raihan-toolkit/");
+  const blob = new Blob([lines.join("\n")], { type: "text/markdown;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "toolkit-skills-cheatsheet.md"; document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
 });
 
 // ------- examples -------
