@@ -186,6 +186,7 @@
           <button class="btn primary run" data-run="social">Generate posts</button>
           <button class="btn ghost sm" data-example="social">Load example</button>
           <button class="btn ghost sm" data-copy="social-out">Copy</button>
+          <button class="btn ghost sm" data-download="social-out">Download .md</button>
         </div>
         <div class="out empty" id="social-out">Output will appear here.</div>
       </div>
@@ -198,6 +199,7 @@
           <button class="btn primary run" data-run="portfolio">Audit portfolio</button>
           <button class="btn ghost sm" data-example="portfolio">Load example</button>
           <button class="btn ghost sm" data-copy="pf-out">Copy</button>
+          <button class="btn ghost sm" data-download="pf-out">Download .md</button>
         </div>
         <div class="hint">Calls the public GitHub API from your browser. Unauthenticated rate limit is 60 req/hr.</div>
         <div class="out empty" id="pf-out">Output will appear here.</div>
@@ -219,6 +221,7 @@
           <button class="btn primary run" data-run="apply">Generate application kit</button>
           <button class="btn ghost sm" data-example="apply">Load example</button>
           <button class="btn ghost sm" data-copy="apply-out">Copy</button>
+          <button class="btn ghost sm" data-download="apply-out">Download .md</button>
         </div>
         <div class="out empty" id="apply-out">Output will appear here.</div>
       </div>
@@ -231,6 +234,7 @@
           <button class="btn primary run" data-run="pr">Draft PR</button>
           <button class="btn ghost sm" data-example="pr">Load example</button>
           <button class="btn ghost sm" data-copy="pr-out">Copy</button>
+          <button class="btn ghost sm" data-download="pr-out">Download .md</button>
         </div>
         <div class="out empty" id="pr-out">Output will appear here.</div>
       </div>
@@ -243,6 +247,7 @@
           <button class="btn primary run" data-run="ai">Ask</button>
           <button class="btn ghost sm" data-example="ai">Load example</button>
           <button class="btn ghost sm" data-copy="ai-out">Copy</button>
+          <button class="btn ghost sm" data-download="ai-out">Download .md</button>
         </div>
         <div class="out empty" id="ai-out">Output will appear here.</div>
       </div>
@@ -328,6 +333,20 @@ document.querySelectorAll("[data-copy-text]").forEach(btn => {
     const el = $(btn.dataset.copyText); if (!el) return;
     try { await navigator.clipboard.writeText(el.textContent); flash(btn); }
     catch(e){}
+  });
+});
+
+// ------- download as .md -------
+const DL_NAME = { "social-out": "toolkit-skills-social.md", "pf-out": "toolkit-skills-portfolio.md", "apply-out": "toolkit-skills-application.md", "pr-out": "toolkit-skills-pr.md", "ai-out": "toolkit-skills-ai-infra.md" };
+document.querySelectorAll("[data-download]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const el = $(btn.dataset.download); if (!el || el.classList.contains("empty")) return;
+    const name = DL_NAME[btn.dataset.download] || "toolkit-skills.md";
+    const blob = new Blob([el.textContent], { type: "text/markdown;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = name; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
   });
 });
 
