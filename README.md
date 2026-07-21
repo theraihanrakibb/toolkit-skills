@@ -23,7 +23,7 @@
 
 ### Option A — Dev/test (quick)
 ```bash
-cc --plugin-dir e:\CodingWorkplace\toolkit-skills
+cc --plugin-dir e:\CodingWorkplace\tmp\toolkit-skills
 ```
 Hooks load at session start. Run `/hooks` to verify.
 
@@ -48,7 +48,7 @@ And in `~/.codebuddy/settings.json` → `enabledPlugins`:
 Restart `cc` to confirm auto-load.
 
 ### Editing workflow
-Edit files in `e:\CodingWorkplace\toolkit-skills\`, then re-run `scripts/sync-to-cache.sh` to push to the persistent cache. Restart `cc` for hook changes.
+Edit files in `e:\CodingWorkplace\tmp\toolkit-skills\`, then re-run `scripts/sync-to-cache.sh` to push to the persistent cache. Restart `cc` for hook changes.
 
 ## File layout
 
